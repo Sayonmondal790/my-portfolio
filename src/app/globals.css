@@ -1,0 +1,65 @@
+@import "tailwindcss";
+
+body {
+  /* Set the deep dark background and white text */
+  background-color: #050505; 
+  color: #ffffff; 
+  
+  /* Create the technical grid pattern */
+  background-image: 
+    linear-gradient(to right, rgba(255, 255, 255, 0.07) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(255, 255, 255, 0.07) 1px, transparent 1px);
+  background-size: 50px 50px; 
+  
+  /* Ensure it covers the whole screen */
+  min-height: 100vh;
+  margin: 0;
+  
+  /* Smooth font rendering */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* HIDE THE DEFAULT MOUSE POINTER */
+* {
+  cursor: none;
+}
+
+/* The Analog Viewfinder Cursor (Brackets Only) */
+.viewfinder-cursor {
+  position: fixed;
+  width: 40px; 
+  height: 20px;
+  pointer-events: none;
+  transform: translate(-50%, -50%);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  transition: width 0.2s ease-out;
+}
+
+/* The structural layout of the brackets */
+.bracket {
+  width: 8px;
+  height: 100%;
+  border: 2px solid white;
+  transition: border-color 0.2s ease-out;
+}
+
+.left-bracket {
+  border-right: none; 
+}
+
+.right-bracket {
+  border-left: none; 
+}
+
+/* The "Focus Achieved" state when hovering over a link */
+.viewfinder-cursor.focus-achieved {
+  width: 24px; /* Snaps even tighter */
+}
+
+.viewfinder-cursor.focus-achieved .bracket {
+  border-color: #ff3333; /* Turns red */
+}
