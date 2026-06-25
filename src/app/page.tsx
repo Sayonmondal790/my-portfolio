@@ -6,6 +6,8 @@ import { Mail } from "lucide-react";
 import { FaGithub, FaLinkedin } from "react-icons/fa";
 import IdBadge from "../components/IdBadge";
 import Preloader from "../components/Preloader";
+import BorderGlow from "../components/BorderGlow"; // <-- Imported your new component
+import DotField from "../components/DotField";
 import { Space_Grotesk, Manrope, JetBrains_Mono } from "next/font/google";
 
 const displayFont = Space_Grotesk({ subsets: ["latin"], weight: ["700"] });
@@ -33,10 +35,18 @@ export default function Home() {
     <>
       {/* === THE NEON BACKGROUND === */}
       <div className="fixed inset-0 z-[-1] bg-[#050505] overflow-hidden pointer-events-none">
-        <div className="absolute -top-[20%] -left-[10%] w-[50%] h-[50%] rounded-full bg-cyan-600/20 blur-[120px]" />
-        <div className="absolute -bottom-[20%] -right-[10%] w-[50%] h-[50%] rounded-full bg-violet-600/20 blur-[120px]" />
+        <DotField
+          dotRadius={1.5}
+          dotSpacing={16}
+          bulgeStrength={40}
+          glowRadius={250}
+          sparkle={true}
+          waveAmplitude={0}
+          gradientFrom="rgba(34, 211, 238, 0.4)" // Neon Cyan
+          gradientTo="rgba(139, 92, 246, 0.4)"   // Deep Violet
+          glowColor="rgba(34, 211, 238, 0.1)"    // Subtle Cyan Cursor Glow
+        />
       </div>
-
       <AnimatePresence mode="wait">
         {isLoading && (
           <Preloader key="preloader" onComplete={() => setIsLoading(false)} />
@@ -44,7 +54,7 @@ export default function Home() {
       </AnimatePresence>
 
       {!isLoading && (
-        <main className={`min-h-screen p-8 md:p-16 max-w-[1400px] mx-auto overflow-hidden relative z-10 ${bodyFont.className}`}>
+        <main className={`min-h-screen p-8 md:p-16 max-w-1400px mx-auto overflow-hidden relative z-10 ${bodyFont.className}`}>
           <motion.div
             variants={containerVariants}
             initial="hidden"
@@ -111,11 +121,16 @@ export default function Home() {
             >
               
               {/* Box 1: The Master Projects Box */}
-              <div className="interactive relative overflow-hidden group border border-neutral-800/50 bg-neutral-950/40 backdrop-blur-md rounded-2xl p-8 md:col-span-2 md:row-span-2 hover:border-cyan-500/50 transition-all duration-500 flex flex-col gap-6">
-                
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[120%] h-[120%] bg-cyan-500/10 blur-[80px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
-                
-                <div className="relative z-10">
+              <BorderGlow
+                className="md:col-span-2 md:row-span-2"
+                backgroundColor="#0a0a0a"
+                glowColor="188 86 53"
+                colors={['#22d3ee', '#8b5cf6', '#0ea5e9']}
+                borderRadius={16}
+                edgeSensitivity={40}
+                animated={true}
+              >
+                <div className="p-8 h-full flex flex-col gap-6 relative z-10">
                   <h2 className={`text-xs text-neutral-500 uppercase tracking-widest font-semibold ${monoFont.className}`}>Featured Projects</h2>
                   
                   <div className="mt-6">
@@ -128,7 +143,7 @@ export default function Home() {
                     </div>
                   </div>
 
-                  <hr className="border-neutral-800/50 my-6 group-hover:border-cyan-900/40 transition-colors duration-500" />
+                  <hr className="border-neutral-800/50 my-6 transition-colors duration-500" />
 
                   <div>
                     <h3 className="text-2xl font-semibold text-neutral-200 group-hover:text-cyan-400 transition-colors duration-300">Architect-Diagram-Tool</h3>
@@ -137,44 +152,52 @@ export default function Home() {
                     </p>
                   </div>
                 </div>
-              </div>
+              </BorderGlow>
 
               {/* Box 2: Core Tech Stack */}
-              <div className="interactive relative overflow-hidden group border border-neutral-800/50 bg-neutral-950/40 backdrop-blur-md rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-500">
-                
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
-                
-                <div className="relative z-10">
+              <BorderGlow
+                backgroundColor="#0a0a0a"
+                glowColor="188 86 53"
+                colors={['#22d3ee', '#8b5cf6', '#0ea5e9']}
+                borderRadius={16}
+                edgeSensitivity={40}
+                animated={true}
+              >
+                <div className="p-8 h-full relative z-10">
                   <h2 className={`text-xs text-neutral-500 uppercase tracking-widest font-semibold mb-6 ${monoFont.className}`}>Toolkit</h2>
                   <div className="flex flex-wrap gap-2">
                     {["Python", "SQL", "C", "TensorFlow", "PyTorch", "Git"].map((skill) => (
-                      <span key={skill} className={`px-3 py-1.5 bg-neutral-900/80 border border-neutral-800 rounded-full text-xs font-medium text-neutral-300 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-950/60 hover:shadow-[0_0_15px_rgba(34,211,238,0.3)] transition-all duration-300 cursor-default ${monoFont.className}`}>
+                      <span key={skill} className={`px-3 py-1.5 bg-neutral-900/80 border border-neutral-800 rounded-full text-xs font-medium text-neutral-300 hover:text-cyan-400 hover:border-cyan-400/50 hover:bg-cyan-950/60 transition-all duration-300 cursor-default ${monoFont.className}`}>
                         {skill}
                       </span>
                     ))}
                   </div>
                 </div>
-              </div>
+              </BorderGlow>
 
               {/* Box 3: Experience / Education */}
-              <div className="interactive relative overflow-hidden group border border-neutral-800/50 bg-neutral-950/40 backdrop-blur-md rounded-2xl p-8 hover:border-cyan-500/50 transition-all duration-500">
-                
-                <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-cyan-500/10 blur-[60px] rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-700 pointer-events-none z-0" />
-
-                <div className="relative z-10">
+              <BorderGlow
+                backgroundColor="#0a0a0a"
+                glowColor="188 86 53"
+                colors={['#22d3ee', '#8b5cf6', '#0ea5e9']}
+                borderRadius={16}
+                edgeSensitivity={40}
+                animated={true}
+              >
+                <div className="p-8 h-full relative z-10">
                   <h2 className={`text-xs text-neutral-500 uppercase tracking-widest font-semibold mb-6 ${monoFont.className}`}>Background</h2>
                   <ul className="space-y-6 text-neutral-300">
-                    <li className="cursor-default">
+                    <li className="cursor-default group">
                       <p className="font-medium text-neutral-200 group-hover:text-cyan-400 transition-colors duration-300">Software Engineering Intern</p>
                       <p className={`text-sm text-neutral-500 mt-1 group-hover:text-cyan-600 transition-colors duration-300 ${monoFont.className}`}>Agni Rath Aerospace</p>
                     </li>
-                    <li className="cursor-default">
+                    <li className="cursor-default group">
                       <p className="font-medium text-neutral-200 group-hover:text-cyan-400 transition-colors duration-300">AI/ML Bootcamp</p>
                       <p className={`text-sm text-neutral-500 mt-1 group-hover:text-cyan-600 transition-colors duration-300 ${monoFont.className}`}>Samsung Innovation Camp</p>
                     </li>
                   </ul>
                 </div>
-              </div>
+              </BorderGlow>
 
             </motion.section>
           </motion.div>
