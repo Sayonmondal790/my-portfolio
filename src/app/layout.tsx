@@ -3,6 +3,7 @@ import { Inter, Noto_Sans, Playfair_Display } from "next/font/google";
 import "./globals.css";
 import CustomCursor from "../components/CustomCursor";
 import { cn } from "@/lib/utils";
+import { Analytics } from '@vercel/analytics/next';
 
 const playfairDisplayHeading = Playfair_Display({subsets:['latin'],variable:'--font-heading'});
 
@@ -26,6 +27,7 @@ export default function RootLayout({
       <body className={`${inter.className} cursor-none`}>
         <CustomCursor /> 
         {children}
+        <Analytics />
       </body>
     </html>
   );
